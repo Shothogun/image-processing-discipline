@@ -1,4 +1,4 @@
-function recover_image(spectrum, name)
+function recover_image(spectrum, name, path)
     % Perform inverse Fourier transform
     recovered_image = ifft2(ifftshift(spectrum));
 
@@ -9,6 +9,5 @@ function recover_image(spectrum, name)
     recovered_image = uint8((recovered_image - min(recovered_image(:))) * (255 / (max(recovered_image(:)) - min(recovered_image(:)))));
 
     % Display or save the recovered image
-    imshow(recovered_image); % Display the recovered image
-    imwrite(recovered_image, ['recovered_', name]); % Save the recovered image
+    imwrite(recovered_image, [path, 'recovered_', name]); % Save the recovered image
 end
