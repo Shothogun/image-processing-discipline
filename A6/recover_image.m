@@ -10,4 +10,9 @@ function recover_image(spectrum, name, path)
 
     % Display or save the recovered image
     imwrite(recovered_image, [path, 'recovered_', name]); % Save the recovered image
+
+    if strfind(name, 'hp')
+      recovered_image = recovered_image + 128;
+      imwrite(recovered_image, [path, 'recovered_dc_added', name]); % Save the recovered image
+    endif
 end
