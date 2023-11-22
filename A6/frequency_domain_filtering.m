@@ -35,6 +35,16 @@ for i = 1:length(image_paths)
 
     write_spectrum(spectrum_filtered, [output_path, 'filtered_spectrum_', name, '_', filter_name, '.png']);
 
-    recover_image(spectrum_filtered, ['filtered_', name, '_', filter_name, '.png'], output_path);
+    recovered_image = recover_image(spectrum_filtered);
+
+    imwrite(recovered_image, [output_path, 'recovered_', name, '_', filter_name, '.png']);
+
+    if strfind(filter_name, 'hp')
+      dc_value = 128;
+
+      recovered_image = recover_image_with_dc(spectrum_filtered, dc_value);
+
+      imwrite(recovered_image, [output_path, 'dc_added_recovered_', name, '_', filter_name, '.png']);
+    endif
   endfor
 end
