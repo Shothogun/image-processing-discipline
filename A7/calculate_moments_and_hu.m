@@ -4,21 +4,7 @@ function [moments_struct, hu_moments] = calculate_moments_and_hu(image)
         error('Image must be binary.');
     end
     
-    % Image dimensions
-    [rows, cols] = size(image);
-    [X, Y] = meshgrid(1:cols, 1:rows);
-    
-    % Raw moments
-    m00 = sum(image(:));
-    m10 = sum(sum(X .* image));
-    m01 = sum(sum(Y .* image));
-    m20 = sum(sum(X.^2 .* image));
-    m02 = sum(sum(Y.^2 .* image));
-    m11 = sum(sum(X .* Y .* image));
-    m30 = sum(sum(X.^3 .* image));
-    m03 = sum(sum(Y.^3 .* image));
-    m12 = sum(sum(X .* Y.^2 .* image));
-    m21 = sum(sum(X.^2 .* Y .* image));
+    [m00, m10, m01, m20, m02, m11, m30, m03, m12, m21] = moments(image);
     
     % Central moments
     x_bar = m10 / m00;
