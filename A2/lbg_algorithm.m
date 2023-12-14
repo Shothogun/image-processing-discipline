@@ -9,7 +9,7 @@ function [centroids, pixels_group_map] = lbg_algorithm(image, groups_amount)
     % create groups
     pixels_group_map = group_pixels(image_in_double, groups_amount, centroids);
 
-    printf("Updating centroids...");
+    printf("Updating centroids...\n");
     % recalculates centroids
     new_centroids = centroids_update(image_in_double, centroids, pixels_group_map);
 

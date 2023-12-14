@@ -1,10 +1,19 @@
 pkg load image;
 
-image_path = 'C:\Users\Shothogun\OneDrive\Documentos\PI\colored\lena_color_512.tif';
+image_path = '/home/shothogun/Documents/Projects/UnB/PI/image-processing-discipline/Images/peppers_color.jpeg';
 image = imread(image_path);
-groups_amount = 16;
 
-sample_image = image(1:16,1:16,:);
+red = [255,0,0];
+green = [0,255,0];
+blue = [0,0,255];
+yellow = [255,255,0];
+magent = [255,0,255];
+
+color_map = [red;green;blue;yellow;magent];
+
+groups_amount = 5;
+
+sample_image = image(:,:,:);
 
 [centroids, pixels_group_map] = lbg_algorithm(sample_image, groups_amount);
 
@@ -12,7 +21,7 @@ sample_image = image(1:16,1:16,:);
 
 for r = 1:rows
   for c = 1:cols
-    image(r,c,:) = centroids(:,:,pixels_group_map(r,c));
+    image(r,c,:) = color_map(pixels_group_map(r,c),:);
   end
 end
 
